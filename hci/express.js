@@ -1,6 +1,7 @@
 const express = require('express');
 // const db = require('./db');
 const app = express();
+const path = require('path');
 const PORT = 3000;
 
 // Serve the home page
