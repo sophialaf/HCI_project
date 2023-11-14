@@ -1,12 +1,16 @@
 const express = require('express');
-const db = require('./db');
-
+// const db = require('./db');
 const app = express();
 const PORT = 3000;
 
-// Initialize the database connection
-db.serialize(() => {
-    // Add your database queries and routes here
+// Serve the home page
+app.get('/', function (req, res) {
+    res.sendFile(path.join(__dirname, 'home.html'));
+});
+
+// Serve static files (html, css, js, images, etc.)
+app.get(['/*.html', '/*.css', '/*.js', '/*.jpg', '/*.jpeg'], (req, res) => {
+    res.sendFile(path.join(__dirname, req.path));
 });
 
 app.listen(PORT, () => {
