@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free to Feast</title>
+    <link rel="stylesheet" href="css.css">
+    </style>
+</head>
+
+<body>
+    <div class="title-bar">
+        <h1>Free to Feast</h1>
+        <div class="search-bar">
+            <input type="text" placeholder="Search for recipes...">
+            <button>Search</button>
+        </div>
+    </div>
+
+    <div class="allergens">
+        <h2>Select Your Restrictions:</h2>
+        <ul>
+            <button class="button-89" role="button" type="button" onclick="toggleSelection(this)">
+                <li>Milk</li>
+            </button>
+            <button class="button-89" role="button" type="button" onclick="toggleSelection(this)">
+                <li>Eggs</li>
+            </button>
+            <button  class="button-89" role="button" type="button" onclick="toggleSelection(this)">
+                <li>Fish</li>
+            </button>
+            <button  class="button-89" role="button" type="button" onclick="toggleSelection(this)">
+                <li>Shellfish</li>
+            </button>
+            <button class="button-89" role="button" type="button" onclick="toggleSelection(this)">
+                <li>Treenuts</li>
+            </button>
+            <button class="button-89" role="button" type="button" type="button" onclick="toggleSelection(this)">
+                <li>Peanuts</li>
+            </button>
+            <button class="button-89" role="button" type="button" type="button" onclick="toggleSelection(this)">
+                <li>Wheat</li>
+            </button>
+            <button class="button-89" role="button" type="button" type="button" onclick="toggleSelection(this)">
+                <li>Soy</li>
+            </button>
+            <button class="button-89" role="button" type="button" type="button" onclick="toggleSelection(this)">
+                <li>Sesame</li>
+            </button>
+            <button class="button-89" role="button" type="button" type="button" onclick="toggleSelection(this)">
+                <li>Sulfites</li>
+            </button>
+        </ul>
+        <ul>
+            <button class="button-89" role="button" type="button" type="button" onclick="toggleSelection(this)">
+                <li>Almonds</li>
+            </button>
+            <button class="button-89" role="button" type="button" type="button" onclick="toggleSelection(this)">
+                <li>Celery</li>
+            </button>
+            <button class="button-89" role="button" type="button" type="button" onclick="toggleSelection(this)">
+                <li>Mustard</li>
+            </button>
+            <button class="button-89" role="button" type="button" type="button" onclick="toggleSelection(this)">
+                <li>Bullshit</li>
+            </button>
+            <button class="button-89" role="button" type="button" type="button" onclick="toggleSelection(this)">
+                <li>Gluten</li>
+            </button>
+            <button class="button-89" role="button" type="button" type="button" onclick="toggleSelection(this)">
+                <li>Coconut</li>
+            </button>
+            <button class="button-89" role="button" type="button" type="button" onclick="toggleSelection(this)">
+                <li>Chives</li>
+            </button>
+            <button class="button-89" role="button" type="button" type="button" onclick="toggleSelection(this)">
+                <li>Garlic</li>
+            </button>
+            <button class="button-89" role="button" type="button" type="button" onclick="toggleSelection(this)">
+                <li>Cashews</li>
+            </button>
+            <button class="button-89" role="button" type="button" type="button" onclick="toggleSelection(this)">
+                <li>Tomatoes</li>
+            </button>
+
+        </ul>
+        <button id="enterButton" onclick="unselectAll()">Enter</button>
+    </div>
+
+    <div class="good-recipes" >
+        <h2 style="visibility:hidden;text-align:center">Here are some food-free recipes for you!</h2>
+    </div>
+    <script>
+        function toggleSelection(button) {
+            button.classList.toggle("selected");
+        }
+
+        function unselectAll() {
+            var buttons = document.querySelectorAll('.selected');
+            buttons.forEach(function (button) {
+                button.classList.remove("selected");
+            });
+    
+            var recipesDiv = document.querySelector('.good-recipes h2');
+            recipesDiv.style.visibility = 'visible';
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,109 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.title-bar {
+    display: flex;
+    justify-content: space-between;
+    background-color: #cf3838;
+    color: white;
+    padding: 10px 20px;
+    margin: 20px;
+}
+
+.title-bar h1 {
+    margin: 0;
+}
+
+.search-bar {
+    display: flex;
+}
+
+.search-bar input[type="text"] {
+    padding: 5px;
+    width: 200px;
+}
+
+.allergens {
+    text-align: center;
+    background-color: #ffafaf;
+    color: white;
+    padding: 20px;
+    margin: 20px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+button {
+    margin: 5px;
+    padding: 10px;
+    background-color: rgba(238, 238, 238, 0.85); /* 15% transparent background */
+    border: 1px solid #ccc;
+    cursor: pointer;
+    width: 104px;
+    box-sizing: border-box;
+}
+
+button.selected {
+    background-color: #721d1d; /* Dark red */
+    color: white;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+}
+
+#enterButton {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #cf3838;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: calc(33.33% - 10px);
+    /* Adjust as needed */
+    box-sizing: border-box;
+}
+
+/* Additional CSS for button-89 */
+.button-89 {
+    --b: 3px;
+    /* border thickness */
+    --s: .45em;
+    /* size of the corner */
+    --color: #721d1d;
+
+    padding: calc(.5em + var(--s)) calc(.9em + var(--s));
+    color: var(--color);
+    --_p: var(--s);
+    background:
+        conic-gradient(from 90deg at var(--b) var(--b), #0000 90deg, var(--color) 0) var(--_p) var(--_p)/calc(100% - var(--b) - 2*var(--_p)) calc(100% - var(--b) - 2*var(--_p));
+    transition: .3s linear, color 0s, background-color 0s;
+    outline: var(--b) solid #0000;
+    outline-offset: .6em;
+    font-size: 16px;
+
+    border: 0;
+
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+}
+
+.button-89:hover,
+.button-89:focus-visible {
+    --_p: 0px;
+    outline-color: var(--color);
+    outline-offset: .05em;
+}
+
+.button-89:active {
+    background: var(--color);
+    color: #fff;
+}
