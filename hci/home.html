@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Free to Feast</title>
     <link rel="stylesheet" href="css.css">
-    </style>
+    <script src="script.js" defer></script>
 </head>
 
 <body>
@@ -27,10 +27,10 @@
             <button class="button-89" role="button" type="button" onclick="toggleSelection(this)">
                 <li>Eggs</li>
             </button>
-            <button  class="button-89" role="button" type="button" onclick="toggleSelection(this)">
+            <button class="button-89" role="button" type="button" onclick="toggleSelection(this)">
                 <li>Fish</li>
             </button>
-            <button  class="button-89" role="button" type="button" onclick="toggleSelection(this)">
+            <button class="button-89" role="button" type="button" onclick="toggleSelection(this)">
                 <li>Shellfish</li>
             </button>
             <button class="button-89" role="button" type="button" onclick="toggleSelection(this)">
@@ -87,25 +87,17 @@
         </ul>
         <button id="enterButton" onclick="unselectAll()">Enter</button>
     </div>
+    <div id="test">
+        <button id="all-rec-butt" onclick="displayAllRecipes()">see all recipes</button>
 
-    <div class="good-recipes" >
-        <h2 style="visibility:hidden;text-align:center">Here are some food-free recipes for you!</h2>
     </div>
-    <script>
-        function toggleSelection(button) {
-            button.classList.toggle("selected");
-        }
 
-        function unselectAll() {
-            var buttons = document.querySelectorAll('.selected');
-            buttons.forEach(function (button) {
-                button.classList.remove("selected");
-            });
-    
-            var recipesDiv = document.querySelector('.good-recipes h2');
-            recipesDiv.style.visibility = 'visible';
-        }
-    </script>
+    <div class="good-recipes">
+        <h2 style="visibility:hidden;text-align:center">Here are some food-free recipes for you!</h2>
+        <ul id="recipeList"></ul>
+    </div>
+    <div class="enter-recipe">
+    </div>
 </body>
 
 </html>
