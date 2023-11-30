@@ -59,20 +59,23 @@ button.selected {
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
 }
 
-#enterButton {
+.enterButton{
     margin-top: 20px;
     padding: 10px;
     background-color: #cf3838;
     color: white;
     border: none;
     cursor: pointer;
-    width: calc(33.33% - 10px);
-    /* Adjust as needed */
+    width: 50;
     box-sizing: border-box;
+    border-radius: 30%;
+    
 }
+
 
 /* Additional CSS for button-89 */
 .button-89 {
+
     --b: 3px;
     /* border thickness */
     --s: .45em;
