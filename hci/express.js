@@ -12,14 +12,6 @@ app.get(['/*.html', '/*.css', '/*.js', '/*.jpg', '/*.jpeg'], (req, res) => {
     res.sendFile(path.join(__dirname, req.path));
 });
 
-const db = new sqlite3.Database('./hci_database.db', sqlite3.OPEN_CREATE | sqlite3.OPEN_READWRITE, (err) => {
-    if (err) {
-        console.error(err.message);
-    } else {
-        console.log('Connected to the database.');
-    }
-});
-
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'home.html'));
 });
@@ -28,8 +20,20 @@ let server = app.listen(port, function () {
     console.log("App server is running on port", port);
     console.log("To end, press Ctrl + C");
 });
+/*------------------------------------------------------------------------------------------------------
+Database connection
+------------------------------------------------------------------------------------------------------*/
+const db = new sqlite3.Database('./hci_database.db', sqlite3.OPEN_CREATE | sqlite3.OPEN_READWRITE, (err) => {
+    if (err) {
+        console.error(err.message);
+    } else {
+        console.log('Connected to the database.');
+    }
+});
 
-// Handle GET request to get all recipes
+/*------------------------------------------------------------------------------------------------------
+Get all recipes
+------------------------------------------------------------------------------------------------------*/
 app.get('/getAllRecipes', (req, res) => {
     const query = `
         SELECT *
@@ -49,16 +53,18 @@ app.get('/getAllRecipes', (req, res) => {
 });
 
 
-// Handle POST request to get recipes without selected allergens
+/*------------------------------------------------------------------------------------------------------
+Select receipes
+------------------------------------------------------------------------------------------------------*/
 app.post('/getRecipes', (req, res) => {
     const selectedAllergens = req.body.allergens;
 
     if (!selectedAllergens || selectedAllergens.length === 0) {
         // If no allergens selected, return all recipes
         const query = `
-            SELECT *
-            FROM recipes
-        `;
+        SELECT *
+        FROM recipes
+    `;
 
         db.all(query, (err, rows) => {
             if (err) {
@@ -66,7 +72,7 @@ app.post('/getRecipes', (req, res) => {
                 res.status(500).json({ error: 'Internal Server Error' });
             } else {
                 const numberOfRecipes = rows.length;
-            console.log(`Selected ${numberOfRecipes} recipes:`);
+                console.log(`all Selected ${numberOfRecipes} recipes:`);
                 res.json({ recipes: rows });
             }
         });
