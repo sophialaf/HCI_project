@@ -1,9 +1,10 @@
-// Function to toggle the selection of allergens
+/*------------------------------------------------------------------------------------------------------
+Toggle buttons
+------------------------------------------------------------------------------------------------------*/
 function toggleSelection(button) {
     button.classList.toggle("selected");
 }
 
-// Function to unselect all allergens
 function unselectAll() {
     var buttons = document.querySelectorAll('.selected');
     buttons.forEach(function (button) {
@@ -11,6 +12,9 @@ function unselectAll() {
     });
 }
 
+/*------------------------------------------------------------------------------------------------------
+Displaying all recipes
+------------------------------------------------------------------------------------------------------*/
 // Additional functionality: Event listener for the "See All Recipes" button
 document.getElementById('all-rec-butt').addEventListener('click', displayAllRecipes);
 
@@ -66,7 +70,10 @@ async function displayAllRecipes() {
     }
 }
 
-// Additional functionality: Event listener for the "Submit" button
+
+/*------------------------------------------------------------------------------------------------------
+Display selected recipes
+------------------------------------------------------------------------------------------------------*/
 document.getElementById('enterButton').addEventListener('click', fetchAndDisplayRecipes);
 
 // Function to check and display allergen-free recipes
@@ -75,6 +82,8 @@ async function fetchAndDisplayRecipes() {
     var allergenNames = Array.from(selectedAllergens).map(function (button) {
         return button.textContent.trim();
     });
+
+    
 
     try {
         // Send the selected allergens to the server
@@ -91,9 +100,6 @@ async function fetchAndDisplayRecipes() {
         var recipeList = document.getElementById('recipeList');
         recipeList.innerHTML = '';
 
-        var title = document.getElementById('recipeTitle');
-        title.textContent = `Here are some ${allergenNames.join(', ')}-free recipes for you!`;
-
         if (data.recipes.length > 0) {
             var recipesDiv = document.querySelector('.good-recipes h2');
             recipesDiv.style.visibility = 'visible';
@@ -105,32 +111,12 @@ async function fetchAndDisplayRecipes() {
             // Loop through the recipes and create divs for each
             data.recipes.forEach(function (recipe, index) {
                 // Create a div for each recipe
-                var recipeContainer = document.createElement('div');
-                recipeContainer.className = 'recipe-container';
+                var recipeDiv = document.createElement('div');
+                recipeDiv.className = 'recipe-item';
+                recipeDiv.textContent = recipe.name;
 
-                var recipeName = document.createElement('div');
-                recipeName.className = 'recipe-name';
-                recipeName.textContent = recipe.name;
-
-                var ingredientsList = document.createElement('ul');
-                ingredientsList.className = 'ingredients-list';
-
-                // Create list items for each ingredient
-                recipe.ingredients.split(',').forEach(function (ingredient) {
-                    var listItem = document.createElement('li');
-                    listItem.textContent = ingredient.trim();
-                    ingredientsList.appendChild(listItem);
-                });
-
-                // Toggle visibility of ingredients list on recipe name click
-                recipeName.addEventListener('click', function () {
-                    ingredientsList.classList.toggle('show');
-                });
-
-                recipeContainer.appendChild(recipeName);
-                recipeContainer.appendChild(ingredientsList);
-
-                containerDiv.appendChild(recipeContainer);
+                // Append the recipe div to the container
+                containerDiv.appendChild(recipeDiv);
 
                 // Check if we need to start a new row
                 if ((index + 1) % 2 === 0) {
@@ -142,11 +128,11 @@ async function fetchAndDisplayRecipes() {
             // Append the container div to the recipeList
             recipeList.appendChild(containerDiv);
         } else {
-            alert('No recipes found without selected allergens.');
+            alert('No recipes found.');
         }
     } catch (error) {
         console.error('Error:', error);
-        alert('An error occurred while checking allergen-free recipes: ' + error.message);
+        alert('An error occurred while fetching recipes.');
     }
 
     // Unselect all allergen buttons

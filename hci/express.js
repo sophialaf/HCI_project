@@ -58,6 +58,8 @@ Select receipes
 ------------------------------------------------------------------------------------------------------*/
 app.post('/getRecipes', (req, res) => {
     const selectedAllergens = req.body.allergens;
+    console.log("test")
+    console.log(selectedAllergens);
 
     if (!selectedAllergens || selectedAllergens.length === 0) {
         // If no allergens selected, return all recipes
@@ -79,6 +81,8 @@ app.post('/getRecipes', (req, res) => {
     } else {
         // If allergens selected, return recipes without those allergens
         const allergenNames = selectedAllergens.map(name => `'${name}'`).join(',');
+
+        console.log(allergenNames);
 
         const query = `
             SELECT DISTINCT recipes.*
