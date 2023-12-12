@@ -70,29 +70,22 @@ async function displayAllRecipes() {
     }
 }
 
-
 /*------------------------------------------------------------------------------------------------------
-Display selected recipes
+Generate random recipes
 ------------------------------------------------------------------------------------------------------*/
-document.getElementById('enterButton').addEventListener('click', fetchAndDisplayRecipes);
+document.getElementById('enterButton').addEventListener('click', generateRandomRecipes);
 
-// Function to check and display allergen-free recipes
-async function fetchAndDisplayRecipes() {
-    var selectedAllergens = document.querySelectorAll('.selected');
-    var allergenNames = Array.from(selectedAllergens).map(function (button) {
-        return button.textContent.trim();
-    });
-
-    
-
+async function generateRandomRecipes() {
     try {
-        // Send the selected allergens to the server
-        const response = await fetch('/getRecipes', {
-            method: 'POST',
+        // Get a random count, you can adjust this logic based on your requirements
+        const count = Math.floor(Math.random() * 10) + 1; // Generates a random number between 1 and 10
+
+        // Send a request to the server to get a random set of recipes with the specified count
+        const response = await fetch(`/getRandomRecipes?count=${count}`, {
+            method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ allergens: allergenNames }),
         });
 
         const data = await response.json();
@@ -100,8 +93,9 @@ async function fetchAndDisplayRecipes() {
         var recipeList = document.getElementById('recipeList');
         recipeList.innerHTML = '';
 
+        var recipesDiv = document.querySelector('.good-recipes h2');
+
         if (data.recipes.length > 0) {
-            var recipesDiv = document.querySelector('.good-recipes h2');
             recipesDiv.style.visibility = 'visible';
 
             // Create a container div for the recipes
@@ -128,13 +122,11 @@ async function fetchAndDisplayRecipes() {
             // Append the container div to the recipeList
             recipeList.appendChild(containerDiv);
         } else {
-            alert('No recipes found.');
+            recipesDiv.style.visibility = 'visible';
+            recipesDiv.textContent = "You cannot eat today.";
         }
     } catch (error) {
         console.error('Error:', error);
         alert('An error occurred while fetching recipes.');
     }
-
-    // Unselect all allergen buttons
-    unselectAll();
 }

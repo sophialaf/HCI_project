@@ -20,6 +20,7 @@ let server = app.listen(port, function () {
     console.log("App server is running on port", port);
     console.log("To end, press Ctrl + C");
 });
+
 /*------------------------------------------------------------------------------------------------------
 Database connection
 ------------------------------------------------------------------------------------------------------*/
@@ -46,53 +47,23 @@ app.get('/getAllRecipes', (req, res) => {
             res.status(500).json({ error: 'Internal Server Error' });
         } else {
             const numberOfRecipes = rows.length;
-            console.log(`all Selected ${numberOfRecipes} recipes:`);
+            console.log(`All selected ${numberOfRecipes} recipes:`);
             res.json({ recipes: rows });
         }
     });
 });
 
-
 /*------------------------------------------------------------------------------------------------------
-Select receipes
+Select recipes
 ------------------------------------------------------------------------------------------------------*/
 app.post('/getRecipes', (req, res) => {
     const selectedAllergens = req.body.allergens;
-    console.log("test")
-    console.log(selectedAllergens);
 
     if (!selectedAllergens || selectedAllergens.length === 0) {
         // If no allergens selected, return all recipes
         const query = `
-        SELECT *
-        FROM recipes
-    `;
-
-        db.all(query, (err, rows) => {
-            if (err) {
-                console.error(err.message);
-                res.status(500).json({ error: 'Internal Server Error' });
-            } else {
-                const numberOfRecipes = rows.length;
-                console.log(`all Selected ${numberOfRecipes} recipes:`);
-                res.json({ recipes: rows });
-            }
-        });
-    } else {
-        // If allergens selected, return recipes without those allergens
-        const allergenNames = selectedAllergens.map(name => `'${name}'`).join(',');
-
-        console.log(allergenNames);
-
-        const query = `
-            SELECT DISTINCT recipes.*
+            SELECT *
             FROM recipes
-            WHERE id NOT IN (
-                SELECT DISTINCT recipes.id
-                FROM recipes
-                JOIN allergens ON recipes.allergens LIKE '%' || allergens.allergen_name || '%'
-                WHERE allergens.allergen_name IN (${allergenNames})
-            )
         `;
 
         db.all(query, (err, rows) => {
@@ -101,11 +72,60 @@ app.post('/getRecipes', (req, res) => {
                 res.status(500).json({ error: 'Internal Server Error' });
             } else {
                 const numberOfRecipes = rows.length;
-                console.log(`idk which this is either Selected ${numberOfRecipes} recipes:`);
+                console.log(`All selected ${numberOfRecipes} recipes:`);
                 res.json({ recipes: rows });
-                // console.log('Filtered recipes:', rows);
+            }
+        });
+    } else {
+        // If allergens selected, return recipes without those allergens
+        const placeholders = selectedAllergens.map(() => '?').join(',');
+        const query = `
+            SELECT DISTINCT recipes.*
+            FROM recipes
+            WHERE id NOT IN (
+                SELECT DISTINCT recipes.id
+                FROM recipes
+                JOIN allergens ON recipes.allergens LIKE '%' || allergens.allergen_name || '%'
+                WHERE allergens.allergen_name IN (${placeholders})
+            )
+        `;
+
+        db.all(query, selectedAllergens, (err, rows) => {
+            if (err) {
+                console.error(err.message);
+                res.status(500).json({ error: 'Internal Server Error' });
+            } else {
+                const numberOfRecipes = rows.length;
+                console.log(`Selected ${numberOfRecipes} recipes without allergens:`);
                 res.json({ recipes: rows });
             }
         });
     }
+});
+// Your existing express.js code remains unchanged
+
+/*------------------------------------------------------------------------------------------------------
+Generate random recipes
+------------------------------------------------------------------------------------------------------*/
+app.get('/getRandomRecipes', (req, res) => {
+    const count = req.query.count || 1; // Default to 1 recipe if 'count' is not provided
+
+    // Your logic to fetch random recipes based on the count
+    const query = `
+        SELECT *
+        FROM recipes
+        ORDER BY RANDOM()
+        LIMIT ${count}
+    `;
+
+    db.all(query, (err, rows) => {
+        if (err) {
+            console.error(err.message);
+            res.status(500).json({ error: 'Internal Server Error' });
+        } else {
+            const numberOfRecipes = rows.length;
+            console.log(`Selected ${numberOfRecipes} random recipes:`);
+            res.json({ recipes: rows });
+        }
+    });
 });
