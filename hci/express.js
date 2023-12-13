@@ -129,3 +129,42 @@ app.get('/getRandomRecipes', (req, res) => {
         }
     });
 });
+
+/*------------------------------------------------------------------------------------------------------
+Login route
+------------------------------------------------------------------------------------------------------*/
+app.post('/login', (req, res) => {
+    // Print all usernames and passwords from the "users" table
+    db.all('SELECT * FROM users', (err, rows) => {
+        if (err) {
+            console.error(err);
+            res.status(500).send('Internal Server Error');
+            return;
+        }
+
+        console.log('All Usernames and Passwords:', rows);
+
+        const { uname, psw } = req.body;
+        console.log('Received username:', uname);
+        console.log('Received password:', psw);
+
+        // Check the database for the user
+        db.get('SELECT * FROM users WHERE username = ? AND password = ?', [uname, psw], (err, row) => {
+            if (err) {
+                console.error(err);
+                res.status(500).send('Internal Server Error');
+                return;
+            }
+
+            console.log('Query Result:', row); // Log the result to the server console
+
+            if (row) {
+                modal.style.display = "none";
+                res.status(200).send('Login successful');
+            } else {
+                res.status(401).send('Invalid username or password');
+            }
+        });
+    });
+});
+

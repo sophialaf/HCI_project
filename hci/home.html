@@ -15,8 +15,9 @@
         <div class="search-bar">
             <input type="text" placeholder="Search for recipes...">
             <button>Search</button>
-            <button class="loginbutt" onclick="document.getElementById('id01').style.display='block'" 
-            style="width:auto;background-color:white"> <img src="user_icon.jpeg" alt="user" style="height:30px;"></button>
+            <button class="loginbutt" onclick="document.getElementById('id01').style.display='block'"
+                style="width:auto;background-color:white"> <img src="user_icon.jpeg" alt="user"
+                    style="height:30px;"></button>
         </div>
     </div>
 
@@ -94,7 +95,7 @@
         <button class="butt" id="all-rec-butt" onclick="displayAllRecipes()">see all recipes</button>
     </div>
     <div id="id01" class="modal">
-        <form class="modal-content animate" action="/action_page.php" method="post">
+        <form class="modal-content animate" action="/login" method="post" id="loginForm">
             <div class="imgcontainer">
                 <span onclick="document.getElementById('id01').style.display='none'" class="close"
                     title="Close Modal">&times;</span>
@@ -102,12 +103,14 @@
 
             <div class="container">
                 <label for="uname"><b>Username</b></label>
-                <input type="text" placeholder="Enter Username" name="uname" required>
+                <input type="text" id="uname" placeholder="Enter Username" name="uname" required>
 
                 <label for="psw"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="psw" required>
+                <input type="password" id="psw" placeholder="Enter Password" name="psw" required>
+                
 
-                <button  class="loginbutt" type="submit" style="background-color:#cf3838;">Login</button>
+
+                <button class="loginbutt" type="submit" style="background-color:#cf3838;">Login</button>
                 <label>
                     <input type="checkbox" checked="checked" name="remember"> Remember me
                 </label>
@@ -122,8 +125,9 @@
     </div>
 
     <div class="good-recipes">
-        <h2 id="recipeTitle" style="visibility:hidden;text-align:center"></div>
-        <ul id="recipeList"></ul>
+        <h2 id="recipeTitle" style="visibility:hidden;text-align:center">
+    </div>
+    <ul id="recipeList"></ul>
     </div>
     <div class="enter-recipe">
     </div>

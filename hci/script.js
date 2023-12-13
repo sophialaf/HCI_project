@@ -178,3 +178,42 @@ window.onclick = function (event) {
         modal.style.display = "none";
     }
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    const loginForm = document.getElementById('loginForm');
+
+    loginForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        const username = document.getElementById('uname').value;
+        const password = document.getElementById('psw').value;
+
+        // Send a request to the server for authentication
+        fetch('/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ uname: username, psw: password }),
+        })
+            .then(response => {
+                if (response.ok) {
+                    // Login successful
+                    return response.text(); // Extract the response text
+                } else {
+                    // Login failed
+                    throw new Error('Invalid username or password');
+                }
+            })
+            .then(message => {
+                // Display success message in a pop-up
+                alert(message);
+                // You can redirect or perform other actions as needed
+            })
+            .catch(error => {
+                // Display error message in a pop-up
+                alert(error.message);
+            });
+    });
+});
+
