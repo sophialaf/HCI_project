@@ -11,6 +11,7 @@ function unselectAll() {
         button.classList.remove("selected");
     });
 }
+
 // Add an array to store selected allergens
 var selectedAllergensArray = [];
 
@@ -44,7 +45,6 @@ function updateSelectedAllergens() {
         selectedAllergensDiv.textContent = 'You selected: None';
     }
 }
-
 
 /*------------------------------------------------------------------------------------------------------
 Displaying all recipes
@@ -82,6 +82,12 @@ async function displayAllRecipes() {
                 var recipeDiv = document.createElement('div');
                 recipeDiv.className = 'recipe-item';
                 recipeDiv.textContent = recipe.name;
+
+                // Create a heart icon for each recipe
+                var heartIcon = document.createElement('span');
+                heartIcon.className = 'heart-icon';
+                heartIcon.innerHTML = '&#x2665;'; // Unicode for a heart symbol
+                recipeDiv.appendChild(heartIcon);
 
                 // Append the recipe div to the container
                 containerDiv.appendChild(recipeDiv);
@@ -142,6 +148,12 @@ async function generateRandomRecipes() {
                 var recipeDiv = document.createElement('div');
                 recipeDiv.className = 'recipe-item';
                 recipeDiv.textContent = recipe.name;
+
+                // Create a heart icon for each recipe
+                var heartIcon = document.createElement('span');
+                heartIcon.className = 'heart-icon';
+                heartIcon.innerHTML = '&#x2665;'; // Unicode for a heart symbol
+                recipeDiv.appendChild(heartIcon);
 
                 // Append the recipe div to the container
                 containerDiv.appendChild(recipeDiv);
@@ -216,4 +228,3 @@ document.addEventListener('DOMContentLoaded', function () {
             });
     });
 });
-
