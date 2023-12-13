@@ -11,6 +11,40 @@ function unselectAll() {
         button.classList.remove("selected");
     });
 }
+// Add an array to store selected allergens
+var selectedAllergensArray = [];
+
+function toggleSelection(button) {
+    button.classList.toggle("selected");
+
+    // Get the name of the allergen from the button's text content
+    var allergenName = button.textContent.trim();
+
+    // Toggle the allergen in the array
+    if (selectedAllergensArray.includes(allergenName)) {
+        // Remove allergen if already selected
+        selectedAllergensArray = selectedAllergensArray.filter(name => name !== allergenName);
+    } else {
+        // Add allergen if not selected
+        selectedAllergensArray.push(allergenName);
+    }
+
+    // Update the content of the selectedAllergens div
+    updateSelectedAllergens();
+}
+
+// Function to update the content of the selectedAllergens div
+function updateSelectedAllergens() {
+    var selectedAllergensDiv = document.getElementById('recipeTitle');
+
+    // Display the selected allergens
+    if (selectedAllergensArray.length > 0) {
+        selectedAllergensDiv.textContent = 'Here are some recipes without: ' + selectedAllergensArray.join(', ');
+    } else {
+        selectedAllergensDiv.textContent = 'You selected: None';
+    }
+}
+
 
 /*------------------------------------------------------------------------------------------------------
 Displaying all recipes
@@ -128,5 +162,19 @@ async function generateRandomRecipes() {
     } catch (error) {
         console.error('Error:', error);
         alert('An error occurred while fetching recipes.');
+    }
+    document.getElementById('selectedAllergens').style.visibility = 'visible';
+}
+
+/* -----------------------------------------------------------------------------------------------------
+Login Form
+-----------------------------------------------------------------------------------------------------*/
+// Get the modal
+var modal = document.getElementById('id01');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function (event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
     }
 }

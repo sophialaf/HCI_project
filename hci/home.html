@@ -15,11 +15,14 @@
         <div class="search-bar">
             <input type="text" placeholder="Search for recipes...">
             <button>Search</button>
+            <button class="loginbutt" onclick="document.getElementById('id01').style.display='block'" 
+            style="width:auto;background-color:white"> <img src="user_icon.jpeg" alt="user" style="height:30px;"></button>
         </div>
     </div>
 
     <div class="allergens">
-        <h2>Select Your Restrictions:</h2>
+        <h1>Want to eat or cook for someone annoying about allergies or whatever?</h1>
+        <h2>Select Your or Their Restrictions:</h2>
         <ul>
             <button class="button-89" role="button" type="button" onclick="toggleSelection(this)">
                 <li>Milk</li>
@@ -90,9 +93,36 @@
     <div id="test">
         <button class="butt" id="all-rec-butt" onclick="displayAllRecipes()">see all recipes</button>
     </div>
+    <div id="id01" class="modal">
+        <form class="modal-content animate" action="/action_page.php" method="post">
+            <div class="imgcontainer">
+                <span onclick="document.getElementById('id01').style.display='none'" class="close"
+                    title="Close Modal">&times;</span>
+            </div>
+
+            <div class="container">
+                <label for="uname"><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" name="uname" required>
+
+                <label for="psw"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="psw" required>
+
+                <button  class="loginbutt" type="submit" style="background-color:#cf3838;">Login</button>
+                <label>
+                    <input type="checkbox" checked="checked" name="remember"> Remember me
+                </label>
+            </div>
+
+            <div class="container" style="background-color:#f1f1f1">
+                <button type="button" onclick="document.getElementById('id01').style.display='none'"
+                    class="cancelbtn loginbutt">Cancel</button>
+                <span class="psw">Forgot <a href="#">password?</a></span>
+            </div>
+        </form>
+    </div>
 
     <div class="good-recipes">
-        <h2 id="recipeTitle" style="visibility:hidden;text-align:center">Here are some food-free recipes for you!</h2>
+        <h2 id="recipeTitle" style="visibility:hidden;text-align:center"></div>
         <ul id="recipeList"></ul>
     </div>
     <div class="enter-recipe">
