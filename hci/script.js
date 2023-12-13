@@ -89,6 +89,19 @@ async function displayAllRecipes() {
                 heartIcon.innerHTML = '&#x2665;'; // Unicode for a heart symbol
                 recipeDiv.appendChild(heartIcon);
 
+                // Add click event listener to the recipe div
+                recipeDiv.addEventListener('click', function () {
+                    // Toggle the 'liked' class on click
+                    heartIcon.classList.toggle('liked');
+
+                    // Change heart color on click
+                    if (heartIcon.classList.contains('liked')) {
+                        heartIcon.style.color = 'red';
+                    } else {
+                        heartIcon.style.color = 'black';
+                    }
+                });
+
                 // Append the recipe div to the container
                 containerDiv.appendChild(recipeDiv);
 
@@ -117,7 +130,6 @@ document.getElementById('enterButton').addEventListener('click', generateRandomR
 
 async function generateRandomRecipes() {
     try {
-        // Get a random count, you can adjust this logic based on your requirements
         const count = Math.floor(Math.random() * 10) + 1; // Generates a random number between 1 and 10
 
         // Send a request to the server to get a random set of recipes with the specified count
@@ -154,6 +166,19 @@ async function generateRandomRecipes() {
                 heartIcon.className = 'heart-icon';
                 heartIcon.innerHTML = '&#x2665;'; // Unicode for a heart symbol
                 recipeDiv.appendChild(heartIcon);
+
+                // Add click event listener to the recipe div
+                recipeDiv.addEventListener('click', function () {
+                    // Toggle the 'liked' class on click
+                    heartIcon.classList.toggle('liked');
+
+                    // Change heart color on click
+                    if (heartIcon.classList.contains('liked')) {
+                        heartIcon.style.color = 'red';
+                    } else {
+                        heartIcon.style.color = 'black';
+                    }
+                });
 
                 // Append the recipe div to the container
                 containerDiv.appendChild(recipeDiv);
