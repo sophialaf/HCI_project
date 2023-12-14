@@ -13,15 +13,17 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap" rel="stylesheet">
-    
+
 </head>
 
 <body>
-    <div class="title-bar">
+    <div class="title-bar box--gradient silver">
         <h1>Free to Feast</h1>
         <div class="search-bar">
             <input type="text" placeholder="Search for recipes...">
-            <button>Search</button>
+            <div class="searchbutt">
+                <a href="#">Search</a>
+            </div>
             <button class="loginbutt" onclick="document.getElementById('id01').style.display='block'"
                 style="width:auto;background-color:white"> <img src="user_icon.jpeg" alt="user"
                     style="height:30px;"></button>
@@ -98,9 +100,7 @@
         </ul>
         <button class="butt" id="enterButton" onclick="unselectAll()" onclick="generateRandomRecipes()">Enter</button>
     </div>
-    <div id="test">
-        <button class="butt" id="all-rec-butt" onclick="displayAllRecipes()">see all recipes</button>
-    </div>
+
     <div id="id01" class="modal">
         <form class="modal-content animate" action="/login" method="post" id="loginForm">
             <div class="imgcontainer">
@@ -124,7 +124,8 @@
             </div>
 
             <div class="container" style="background-color:#f1f1f1">
-                <button style="color:white;" type="button" onclick="document.getElementById('id01').style.display='none'"
+                <button style="color:white;" type="button"
+                    onclick="document.getElementById('id01').style.display='none'"
                     class="cancelbtn loginbutt">Cancel</button>
                 <span class="psw">Forgot <a href="#">password?</a></span>
             </div>

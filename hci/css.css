@@ -27,8 +27,20 @@ body {
 
 .allergens {
     text-align: center;
-    background-color: #ffafaf;
-    color: white;
+    background: linear-gradient(45deg,
+            #999 5%,
+            #fff 10%,
+            #ccc 30%,
+            #ddd 50%,
+            #ccc 70%,
+            #fff 80%,
+            #999 95%);
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    color: black;
     padding: 20px;
     margin: 20px;
 }
@@ -72,8 +84,9 @@ ul {
     background-image: url('galaxy.jpeg');
     text-align: center;
     font-family: 'Pixelify Sans', sans-serif;
-    color:white;
+    color: white;
 }
+
 .recipe-item {
     display: flex;
     flex-direction: column;
@@ -245,7 +258,8 @@ Special button stuff
     -webkit-user-select: none;
     touch-action: manipulation;
     font-family: 'Pixelify Sans', sans-serif;
-    transition: background-color 0.3s, color 0.3s; /* Added transition for smooth effects */
+    transition: background-color 0.3s, color 0.3s;
+    /* Added transition for smooth effects */
 }
 
 .button-85:hover {
@@ -304,8 +318,119 @@ Special button stuff
     width: 100%;
     height: 100%;
     background: #222;
-    color:#48ff00;
+    color: #48ff00;
     left: 0;
     top: 0;
     border-radius: 10px;
+}
+
+@keyframes shine {
+    0% {
+        transform: translateX(-100%) translateY(-100%) rotate(30deg);
+    }
+
+    80% {
+        transform: translateX(-100%) translateY(-100%) rotate(30deg);
+    }
+
+    100% {
+        transform: translateX(100%) translateY(100%) rotate(30deg);
+    }
+}
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    justify-content: center;
+}
+
+.box--gradient {
+    color: black;
+}
+
+.box--gradient p {
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+    flex-grow: 1;
+    margin: 0;
+    font-size: 30px;
+}
+
+.box--gradient:after {
+    content: '';
+    top: 0;
+    transform: translateX(100%) rotate(30deg);
+    width: 300%;
+    height: 300%;
+    position: absolute;
+    z-index: 1;
+    animation: shine 3s infinite ease-in;
+    background:
+        linear-gradient(to right,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 0.8) 50%,
+            rgba(128, 186, 232, 0) 99%,
+            rgba(128, 186, 232, 0) 100%);
+}
+
+.box--gradient.silver {
+    background: linear-gradient(to bottom, #bcc6cc, #eee, #bcc6cc);
+}
+
+.searchbutt {
+    position: relative;
+    display: inline-block;
+    margin: 20px;
+}
+
+.searchbutt a {
+    color: white;
+    font-family: Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    text-align: center;
+    text-decoration: none;
+    background-color: silver;
+    display: block;
+    position: relative;
+    padding: 5px 10px;
+
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    text-shadow: 0px 1px 0px #000;
+    filter: dropshadow(color=#000, offx=0px, offy=1px);
+
+    -webkit-box-shadow: inset 0 1px 0 #FFE5C4, 0 10px 0 #000000;
+    -moz-box-shadow: inset 0 1px 0 #FFE5C4, 0 10px 0 #000000;
+    box-shadow: inset 0 1px 0 #FFE5C4, 0 10px 0 #000000;
+
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.searchbutt a:active {
+    top: 10px;
+    background-color: silver;
+
+    -webkit-box-shadow: inset 0 1px 0 #FFE5C4, inset 0 -3px 0 #000000;
+    -moz-box-shadow: inset 0 1px 0 #FFE5C4, inset 0 -3pxpx 0 #000000;
+    box-shadow: inset 0 1px 0 #FFE5C4, inset 0 -3px 0 #000000;
+}
+
+.searchbutt:after {
+    content: "";
+    height: 100%;
+    width: 100%;
+    padding: 4px;
+    position: absolute;
+    bottom: -15px;
+    left: -4px;
+    z-index: -1;
+    background-color: #2B1800;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
 }
