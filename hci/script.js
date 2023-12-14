@@ -47,95 +47,6 @@ function updateSelectedAllergens() {
 }
 
 /*------------------------------------------------------------------------------------------------------
-Displaying all recipes
-------------------------------------------------------------------------------------------------------*/
-// Additional functionality: Event listener for the "See All Recipes" button
-document.getElementById('all-rec-butt').addEventListener('click', displayAllRecipes);
-
-// Function to fetch and display all recipes
-async function displayAllRecipes() {
-    try {
-        // Send a request to the server to get all recipes
-        const response = await fetch('/getAllRecipes', {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        });
-
-        const data = await response.json();
-
-        var recipeList = document.getElementById('recipeList');
-        recipeList.innerHTML = '';
-
-        if (data.recipes.length > 0) {
-            var recipesDiv = document.querySelector('.good-recipes h2');
-            recipesDiv.style.visibility = 'visible';
-
-            // Create a container div for the recipes
-            var containerDiv = document.createElement('div');
-            containerDiv.className = 'recipe-container';
-
-            // Loop through the recipes and create divs for each
-            data.recipes.forEach(function (recipe, index) {
-                // Create a div for each recipe
-                var recipeDiv = document.createElement('div');
-                recipeDiv.className = 'recipe-item';
-                recipeDiv.textContent = recipe.name;
-
-                // Create a div for ingredients
-                var ingredientsDiv = document.createElement('div');
-                ingredientsDiv.id = `ingredients_${recipe.id}`;
-                ingredientsDiv.style.display = 'none'; // Initially hidden
-                ingredientsDiv.textContent = recipe.ingredients;
-
-                // Create a heart icon for each recipe
-                var heartIcon = document.createElement('span');
-                heartIcon.className = 'heart-icon';
-                heartIcon.innerHTML = '&#x2665;'; // Unicode for a heart symbol
-                recipeDiv.appendChild(heartIcon);
-
-                // Append the ingredients div to the recipe div
-                recipeDiv.appendChild(ingredientsDiv);
-
-                // Add click event listener to the recipe div
-                recipeDiv.addEventListener('click', function () {
-                    // Toggle the 'liked' class on click
-                    heartIcon.classList.toggle('liked');
-
-                    // Change heart color on click
-                    if (heartIcon.classList.contains('liked')) {
-                        heartIcon.style.color = 'red';
-                    } else {
-                        heartIcon.style.color = 'black';
-                    }
-
-                    // Toggle the visibility of ingredients
-                    ingredientsDiv.style.display = ingredientsDiv.style.display === 'none' ? 'block' : 'none';
-                });
-
-                // Append the recipe div to the container
-                containerDiv.appendChild(recipeDiv);
-
-                // Check if we need to start a new row
-                if ((index + 1) % 2 === 0) {
-                    // Add a line break after every two recipes
-                    containerDiv.appendChild(document.createElement('br'));
-                }
-            });
-
-            // Append the container div to the recipeList
-            recipeList.appendChild(containerDiv);
-        } else {
-            alert('No recipes found.');
-        }
-    } catch (error) {
-        console.error('Error:', error);
-        alert('An error occurred while fetching recipes.');
-    }
-}
-
-/*------------------------------------------------------------------------------------------------------
 Generate random recipes
 ------------------------------------------------------------------------------------------------------*/
 document.getElementById('enterButton').addEventListener('click', generateRandomRecipes);
@@ -267,11 +178,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             })
             .then(data => {
-                // Display success message in a pop-up
-                alert(data.message);
-                // You can redirect or perform other actions as needed
-                // For example, close the modal if login is successful
                 modal.style.display = "none";
+
+                // Update the title with the username
+                document.querySelector('.title-bar h1').textContent = `Free to Feast: Welcome back ${data.username}`;
             })
             .catch(error => {
                 // Display error message in a pop-up

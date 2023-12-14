@@ -148,7 +148,7 @@ app.post('/login', (req, res) => {
 
         if (row) {
             // Login successful
-            res.status(200).json({ message: 'Login successful' });
+            res.status(200).json({ message: 'Login successful', username: row.username });
         } else {
             // Login failed
             res.status(401).json({ error: 'Invalid username or password' });

@@ -22,7 +22,7 @@
         <div class="search-bar">
             <input type="text" placeholder="Search for recipes...">
             <div class="searchbutt">
-                <a href="#">Search</a>
+                <a href="search.html">Search</a>
             </div>
             <button class="loginbutt" onclick="document.getElementById('id01').style.display='block'"
                 style="width:auto;background-color:white"> <img src="user_icon.jpeg" alt="user"
@@ -98,7 +98,10 @@
             </button>
 
         </ul>
-        <button class="butt" id="enterButton" onclick="unselectAll()" onclick="generateRandomRecipes()">Enter</button>
+        <div class="searchbutt" id="enterButton" onclick="unselectAll()" onclick="generateRandomRecipes()">
+            <a href="#">Enter</a>
+        </div>
+        <!-- <button class="searchbutt" id="enterButton" onclick="unselectAll()" onclick="generateRandomRecipes()">Enter</button> -->
     </div>
 
     <div id="id01" class="modal">
@@ -132,7 +135,7 @@
         </form>
     </div>
 
-    <div class="good-recipes">
+    <div class="good-recipes" style="color:white;">
         <h2 id="recipeTitle" style="visibility:hidden;text-align:center"></h2>
         <ul id="recipeList"></ul>
     </div>
