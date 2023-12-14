@@ -83,11 +83,20 @@ async function displayAllRecipes() {
                 recipeDiv.className = 'recipe-item';
                 recipeDiv.textContent = recipe.name;
 
+                // Create a div for ingredients
+                var ingredientsDiv = document.createElement('div');
+                ingredientsDiv.id = `ingredients_${recipe.id}`;
+                ingredientsDiv.style.display = 'none'; // Initially hidden
+                ingredientsDiv.textContent = recipe.ingredients;
+
                 // Create a heart icon for each recipe
                 var heartIcon = document.createElement('span');
                 heartIcon.className = 'heart-icon';
                 heartIcon.innerHTML = '&#x2665;'; // Unicode for a heart symbol
                 recipeDiv.appendChild(heartIcon);
+
+                // Append the ingredients div to the recipe div
+                recipeDiv.appendChild(ingredientsDiv);
 
                 // Add click event listener to the recipe div
                 recipeDiv.addEventListener('click', function () {
@@ -100,6 +109,9 @@ async function displayAllRecipes() {
                     } else {
                         heartIcon.style.color = 'black';
                     }
+
+                    // Toggle the visibility of ingredients
+                    ingredientsDiv.style.display = ingredientsDiv.style.display === 'none' ? 'block' : 'none';
                 });
 
                 // Append the recipe div to the container
@@ -161,11 +173,20 @@ async function generateRandomRecipes() {
                 recipeDiv.className = 'recipe-item';
                 recipeDiv.textContent = recipe.name;
 
+                // Create a div for ingredients
+                var ingredientsDiv = document.createElement('div');
+                ingredientsDiv.id = `ingredients_${recipe.id}`;
+                ingredientsDiv.style.display = 'none'; // Initially hidden
+                ingredientsDiv.textContent = recipe.ingredients;
+
                 // Create a heart icon for each recipe
                 var heartIcon = document.createElement('span');
                 heartIcon.className = 'heart-icon';
                 heartIcon.innerHTML = '&#x2665;'; // Unicode for a heart symbol
                 recipeDiv.appendChild(heartIcon);
+
+                // Append the ingredients div to the recipe div
+                recipeDiv.appendChild(ingredientsDiv);
 
                 // Add click event listener to the recipe div
                 recipeDiv.addEventListener('click', function () {
@@ -178,6 +199,9 @@ async function generateRandomRecipes() {
                     } else {
                         heartIcon.style.color = 'black';
                     }
+
+                    // Toggle the visibility of ingredients
+                    ingredientsDiv.style.display = ingredientsDiv.style.display === 'none' ? 'block' : 'none';
                 });
 
                 // Append the recipe div to the container
@@ -236,16 +260,18 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(response => {
                 if (response.ok) {
                     // Login successful
-                    return response.text(); // Extract the response text
+                    return response.json(); // Extract the JSON response
                 } else {
                     // Login failed
                     throw new Error('Invalid username or password');
                 }
             })
-            .then(message => {
+            .then(data => {
                 // Display success message in a pop-up
-                alert(message);
+                alert(data.message);
                 // You can redirect or perform other actions as needed
+                // For example, close the modal if login is successful
+                modal.style.display = "none";
             })
             .catch(error => {
                 // Display error message in a pop-up
